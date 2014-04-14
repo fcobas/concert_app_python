@@ -1,0 +1,21 @@
+{% extends template_base %}
+{% block title %}Gracias{% endblock %}
+{% block header %}
+{{ block.super }}
+	<div align="center"><h1>Gracias!</h1>
+{% endblock %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+	{% if ticket %}
+		<h2>Gracias por comprar el ticket para el espectaculo <span style="color:blue">{{ticket.precio.evento.nombre}}</span></h2>
+		<ul>
+			<li>La fecha del evento es: </li>
+			<li><span style="color:red">{{ticket.precio.evento.fecha}}</span></li>
+			<li>El lugar es: <span style="color:red">{{ticket.precio.evento.lugar.nombre}}</span></li>
+			<li>Lo retira con el documento Número: <span style="font-weight:bold">{{di}}</span></li>
+		</ul>
+	{% endif %}
+	<p></p>
+	<a href="../../" style="font-style:italic">Volver</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends template_base %}
+{% block title %}Ingreso de Telefono{% endblock %}
+{% block header %}
+{{ block.super }}
+	<div align="center"><h1>Ingreso de Telefono</h1>
+{% endblock %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<form id="form1" name="form1" method="post" action="">
+	{% if msg %}
+		<p style="background-color:#F00; color:#FFF"> {{msg}} </p>
+	{% endif %}
+	{% csrf_token %} 
+	{% if form.non_field_errors %}
+		{% for error in form.non_field_errors %}
+			<p style="background-color:#F00; color:#FFF"> {{error}} </p>
+		{% endfor %}
+	{% endif %}
+	<p>Ingrese un Telefono: <input name="telefono" type="text" id="telefono" value="{{form.telefono.value}}" /> 
+	<input type="submit" name="button" id="button" value="Continuar" {% if agotadas %}disabled{% endif %}/></p>
+</form> 
+{% endblock %}

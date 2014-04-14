@@ -1,0 +1,19 @@
+{% extends template_base %}<!--retrieve base.html-->
+{% block title %}Eventos{% endblock %}
+{% block header %}<!--start header-->
+	{{ block.super }}
+<div align="center"><h1>Listado de Eventos</h1></div>
+{% endblock %}<!--end header-->
+{% block body%}
+	<ul class="eventos">
+		{% if msg %}
+		<li>{{msg}}</li>
+		{% else %}
+			{% for evento in eventos %}
+				<li><a href="../evento/{{evento.id}}">{{evento.nombre}}</a></li>
+			{% empty %}
+				<li>No existen eventos para esa categoria.</li>
+			{% endfor %}
+		{% endif %}<!--finish msg-->
+	</ul>
+{% endblock%}<!--end body-->

@@ -1,0 +1,40 @@
+{% extends template_base %}<!--retrieve base.html-->
+{% block title %}Listado de Categorias{% endblock %}
+{% block header %}<!--start header-->
+	{{ block.super }}
+<h1 align="center">Listado de Categorias</h1> 
+{% endblock %}<!--end header-->
+{% block body%}
+<form action="" method="POST" name="busqueda">
+	{% csrf_token %}
+	<div id="buscar">
+		<label>Buscar: </label>
+		<input type="text" name="buscar" value="{% if busqueda != None %}{{ busqueda }} {% endif %}"/>
+		<input type="submit" value="Buscar"/>
+	</div>
+<div align="center" class="container">
+	<div id="menu-holder" class="menu-holder">
+		<ul id="toc" class="toc">
+			{% for C in categorias %}
+			<li class="toc-h1"><a href="/categoria/{{C.id}}">{{C.nombre}}</a></li>
+			{% empty %}
+			<li class="toc-h1">No existen categorias</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div><!-- .container -->
+</form>
+{% endblock%}<!--end body-->
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+	// listen for click
+	$('.toc-h1').on('click', function(e) {
+		$.post( '/categoria/{{C.id}}/', $(this).serialize(), function(response) {
+		});
+		// disable default action
+		e.preventDefault();
+	});
+
+</script>

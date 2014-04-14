@@ -1,0 +1,50 @@
+{% extends template_base %}<!--retrieve base.html-->
+{% block title %}Evento{% endblock %}
+{% block header %}<!--start header-->
+	{{ block.super }}
+<div align="center"><h1>Evento</h1></div>
+{% endblock %}<!--end header-->
+{% block body%}
+	<ul class="eventos","funciones">
+		{% if msg %}
+			<li>{{msg}}</li>
+		{% endif %}<!--finish msg-->
+		{% if evento %}
+			<li>Nombre:      {{evento.nombre}}</li>
+			<li>Descripcion: {{evento.descripcion}}</li>
+			<li>Fecha:       {{evento.fecha}}</li>
+			<li>Activo: {% if evento.activo %}* * SI * *{% else %}* * NO * *{% endif %}
+			<li>Disponibilidad: {{evento.darDisponible}}</li>
+			<li>{% if not evento.activo %}				
+					{% ifequal evento.darMensaje 4 %}
+							<p style="background-color:#F00; color:#FFF"> Evento Finalizado </p>
+					{% endifequal%}
+
+					{% ifequal evento.darMensaje 0 %}
+							<p style="background-color:#F00; color:#FFF"> Entradas Agotadas </p>
+					{% endifequal %}
+				{% else %}							
+					{% ifequal evento.darMensaje 3 %}
+						<p style="background-color:#090; color:#FFF"> Disponibilidad de entradas </p>
+					{% endifequal%}
+				
+					{% ifequal evento.darMensaje 2 %}
+						<p style="background-color:#F60; color:#FFF"> Adquirir entrada ahora </p>
+					{% endifequal %}
+					
+					{% ifequal evento.darMensaje 1 %}
+						<p style="background-color:#F00; color:#FFF"> Pocas Entradas Disponibles </p>
+					{% endifequal %}					
+				{%endif%}
+				</li>
+		{% endif %}
+	</ul>
+	<ul id="sectores">
+		Seleccione un sector: 
+		{% for precio in precios %}
+			<li><a href="../telefono/{{evento.id}}/{{precio.id}}">{{precio.sector.nombre}}</a></li>
+		{% empty %}
+			<li style="text-decoration:underline">No hay sectores disponibles.</li>
+		{% endfor %}
+	</ul>
+{% endblock%}<!--end body-->

@@ -1,0 +1,31 @@
+{% extends template_base %}
+{% block title %}Ingreso de Pin{% endblock %}
+{% block header %}
+{{ block.super }}
+	<div align="center"><h1>Ingreso de Pin</h1>
+{% endblock %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<form id="form1" name="form1" method="post" action="">
+	<div id="errores">
+	{% csrf_token %} 
+	{% if form.non_field_errors %}
+		{% for error in form.non_field_errors %}
+			<p style="background-color:#F00; color:#FFF"> {{error}} </p>
+		{% endfor %}
+	{% endif %}
+	{% if msg %}
+		<p style="background-color:#F00; color:#FFF"> {{msg}} </p>
+	{% endif %}
+
+	</div>
+	<div id="pin">
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
+		<span id="formulario">Ingrese un {{form}}</span> 
+		<input type="submit" name="button" id="button" value="Continuar" />
+	</div>
+</form> 
+{% endblock %}
